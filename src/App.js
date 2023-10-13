@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Home";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import User from "./component/User";
 
 function App() {
   const light = createTheme({
@@ -8,9 +9,9 @@ function App() {
       primary: {
         main: "#ff5300",
       },
-      secondary : {
-        main: '#ef3c3c'
-      }
+      secondary: {
+        main: "#ef3c3c",
+      },
     },
     typography: {
       fontFamily: "Work+Sans",
@@ -41,6 +42,7 @@ function MyRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/user" element={<User />} />
     </Routes>
   );
 }

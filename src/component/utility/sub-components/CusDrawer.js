@@ -11,6 +11,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonIcon from "@mui/icons-material/Person";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 export default function CusDrawer({ open, close }) {
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -23,8 +24,8 @@ export default function CusDrawer({ open, close }) {
   };
 
   const panel = [
-    { title: "Dashboard", icon: <DashboardIcon /> },
-    { title: "User", icon: <PersonIcon /> },
+    { link: "/", title: "Dashboard", icon: <DashboardIcon /> },
+    { link: "/user", title: "User", icon: <PersonIcon /> },
   ];
 
   const list = () => (
@@ -36,7 +37,7 @@ export default function CusDrawer({ open, close }) {
     >
       <List>
         {panel.map((label, index) => (
-          <ListItem key={index} disablePadding>
+          <ListItem key={index} disablePadding component={Link} to={label.link}>
             <ListItemButton>
               <ListItemIcon>{label.icon}</ListItemIcon>
               <ListItemText primary={label.title} />

@@ -9,7 +9,7 @@ import RouteIcon from "@mui/icons-material/Route";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import SearchIcon from "@mui/icons-material/Search";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import { listTrackRecords } from "../service/service";
+import { listTrackRecords, metaCount } from "../service/service";
 // User Journey, Enrol Click , Course Card Click, Search events
 
 const Home = () => {
@@ -21,6 +21,12 @@ const Home = () => {
     page: 1,
     perPage: 25,
     total: 0,
+    event_count: {
+      path: 0,
+      card: 0,
+      enroll: 0,
+      search: 0,
+    },
     isLoading: true,
     email: "",
   };
@@ -30,42 +36,60 @@ const Home = () => {
 
   useEffect(() => {
     handleCardClick("User Logs");
+    getMeta();
   }, []);
   useEffect(() => {
     handleCardClick(localState.current_card);
+    getMeta();
   }, [localState.page]);
 
   useEffect(() => {
     handleCardClick(localState.current_card, 1);
+    getMeta();
   }, [localState.current_card]);
+
+  async function getMeta(params) {
+    let res = await metaCount();
+    console.log(res);
+    dispatch({
+      type: "Set_Val",
+      payload: {
+        event_count: {
+          path: res.data.data.path_track,
+          card: res.data.data.card_click,
+          enroll: res.data.data.enroll_click,
+          search: res.data.data.search,
+        },
+      },
+    });
+  }
 
   let cards = [
     {
       title: "User Logs",
       icon: <RouteIcon fontSize={"large"} />,
-      count: 100,
+      count: localState.event_count.path,
       bg: "#12badb",
     },
     {
       title: "Search",
       icon: <SearchIcon fontSize={"large"} />,
-      count: 100,
+      count: localState.event_count.search,
       bg: "#d92121",
     },
     {
       title: "Course Card Click",
       icon: <CreditCardIcon fontSize={"large"} />,
-      count: 100,
+      count: localState.event_count.card,
       bg: "#60b30e",
     },
     {
       title: "Enroll Click",
       icon: <SubscriptionsIcon fontSize={"large"} />,
-      count: 100,
+      count: localState.event_count.enroll,
       bg: "#ed7926",
     },
   ];
-
   async function handleCardClick(card, page = localState.page) {
     try {
       console.log(card);

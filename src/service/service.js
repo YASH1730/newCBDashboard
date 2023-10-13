@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const localBaseUrl = "http://localhost:8000/api";
-const official = "https://www.classbazaar.com/api";
+// const URL = "http://localhost:8000/api";
+const URL = "https://www.classbazaar.com/api";
 
 // export const getSearchRecords = async(data)=>{
 //    return await axios.get(`${localBaseUrl}/login`,data)
@@ -16,5 +16,8 @@ const official = "https://www.classbazaar.com/api";
 //    return await axios.get(`${localBaseUrl}/login`,data)
 //   }
 export const listTrackRecords = async (data) => {
-  return await axios.post(`${official}/listTrackRecords`, data);
+  return await axios.post(`${URL}/listTrackRecords`, data);
+};
+export const metaCount = async (data) => {
+  return await axios.get(`${URL}/metaCount`, data);
 };
