@@ -12,7 +12,11 @@ import PersonIcon from "@mui/icons-material/Person";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Logout } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../../store/action/action";
 export default function CusDrawer({ open, close }) {
+  const dispatch = useDispatch()
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -27,6 +31,13 @@ export default function CusDrawer({ open, close }) {
     { link: "/", title: "Dashboard", icon: <DashboardIcon /> },
     { link: "/user", title: "User", icon: <PersonIcon /> },
   ];
+
+  function handleLogout(){
+    dispatch(setAuth({
+      isAuth : false
+    }))
+    window.location.reload();
+  }
 
   const list = () => (
     <Box
@@ -44,6 +55,12 @@ export default function CusDrawer({ open, close }) {
             </ListItemButton>
           </ListItem>
         ))}
+           <ListItem key={"logOut"} disablePadding >
+            <ListItemButton onClick={handleLogout}>
+              <ListItemIcon><Logout/></ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
       </List>
     </Box>
   );

@@ -2,6 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Home";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import User from "./component/User";
+import Login from "./component/Login";
+import SnackBar from "./component/utility/SnackBar";
+import { useSelector } from "react-redux";
+// import { Login } from "@mui/icons-material";
 
 function App() {
   const light = createTheme({
@@ -32,6 +36,7 @@ function App() {
     <ThemeProvider theme={light}>
       <BrowserRouter>
         <CssBaseline enableColorScheme />
+      <SnackBar/>
         <MyRoutes />
       </BrowserRouter>
     </ThemeProvider>
@@ -39,10 +44,12 @@ function App() {
 }
 
 function MyRoutes() {
+  const {auth} = useSelector(state=>state)
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/user" element={<User />} />
+      {auth.isAuth && <Route path="/" element={<Home />} />}
+      {auth.isAuth && <Route path="/user" element={<User />} />}
+      <Route path="/*" element={<Login />} />
     </Routes>
   );
 }
