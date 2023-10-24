@@ -1,7 +1,8 @@
 import axios from "axios";
+import config from "../config.json"
 
-// const URL = "http://localhost:8000/api";
-const URL = "https://www.classbazaar.com/api";
+const URL = config.Official_URL;
+// const URL = config.Local_URL;
 
 // export const getSearchRecords = async(data)=>{
 //    return await axios.get(`${localBaseUrl}/login`,data)
