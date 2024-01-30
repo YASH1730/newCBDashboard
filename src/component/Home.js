@@ -50,14 +50,6 @@ const Home = () => {
     handleCardClick(localState.current_card, 1);
     getMeta();
   }, [localState.current_card,localState.filtered_clicked]);
-  useEffect(() => {
-    handleCardClick(localState.current_card);
-    getMeta();
-  }, [localState.page,localState.perPage]);
-
-  async function CloseTab(){
-    await logOut()
-  }
 
 
   async function getMeta(params) {
@@ -368,7 +360,7 @@ const Home = () => {
             </Grid>
         {/* Data Grid  */}
         <Grid item xs={12} className="p-2">
-          <CusDataGrid state={localState} setState={dispatch}/>
+          <CusDataGrid handleCardClick={handleCardClick} state={localState} setState={dispatch}/>
         </Grid>
       </Grid>
     </>

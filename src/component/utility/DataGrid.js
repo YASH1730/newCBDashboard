@@ -4,11 +4,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import "../../assets/css/main.css";
 import { Grid, Typography } from "@mui/material";
 
-export default function CusDataGrid({ state, setState }) {
+export default function CusDataGrid({ state, setState, handleCardClick }) {
   function handlePageSize(e){
+    console.log(e)
+    handleCardClick(state.current_card,e.page+1)
     setState({
       type : 'Set_Val',
-      payload : e
+      payload : {...e}
     })
     
   }
@@ -26,7 +28,7 @@ export default function CusDataGrid({ state, setState }) {
             pagination
             page={state.page - 1}
             limit={state.perPage}
-            pageSize={state.perPage}
+
             paginationMode="server"
             paginationModel={{
               pageSize: state.perPage,
