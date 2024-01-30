@@ -9,7 +9,7 @@ import RouteIcon from "@mui/icons-material/Route";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import SearchIcon from "@mui/icons-material/Search";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import { listTrackRecords, metaCount } from "../service/service";
+import { listTrackRecords, logOut, metaCount } from "../service/service";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
 // User Journey, Enrol Click , Course Card Click, Search events
@@ -44,6 +44,8 @@ const Home = () => {
   //   handleCardClick("User Logs");
   //   getMeta();
   // }, []);
+
+
   useEffect(() => {
     handleCardClick(localState.current_card, 1);
     getMeta();
@@ -53,6 +55,9 @@ const Home = () => {
     getMeta();
   }, [localState.page,localState.perPage]);
 
+  async function CloseTab(){
+    await logOut()
+  }
 
 
   async function getMeta(params) {
@@ -96,7 +101,7 @@ const Home = () => {
       bg: "#ed7926",
     },
   ];
-  async function handleCardClick(card, page = localState.page) {
+  async function handleCardClick(card, page = localState.page || 1) {
     try {
       let res,
         columns = [],

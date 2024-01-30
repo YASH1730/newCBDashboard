@@ -22,3 +22,6 @@ export const listTrackRecords = async (data) => {
 export const metaCount = async (data) => {
   return await axios.get(`${URL}/metaCount`, data);
 };
+export const logOut = async (data) => {
+  return await axios.get(`${URL}/logOut`, data);
+};
