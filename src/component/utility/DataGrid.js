@@ -5,6 +5,13 @@ import "../../assets/css/main.css";
 import { Grid, Typography } from "@mui/material";
 
 export default function CusDataGrid({ state, setState }) {
+  function handlePageSize(e){
+    setState({
+      type : 'Set_Val',
+      payload : e
+    })
+    
+  }
   return (
     <Grid container className="data-grid-container">
       <Grid item xs={12} p={1} pb={2}>
@@ -16,22 +23,16 @@ export default function CusDataGrid({ state, setState }) {
             rows={state.rows}
             rowCount={state.total}
             loading={state.isLoading}
-            rowsPerPageOptions={[10, 30, 50, 70, 100]}
             pagination
             page={state.page - 1}
             limit={state.perPage}
             pageSize={state.perPage}
             paginationMode="server"
-            onPageChange={(newPage) => {
-              setState(() =>
-                setState({ action: "Set_Val", page: newPage + 1 })
-              );
+            paginationModel={{
+              pageSize: state.perPage,
+              page: state.page,
             }}
-            onPageSizeChange={(newPageSize) =>
-              setState(() =>
-                setState({ action: "Set_Val", perPage: newPageSize })
-              )
-            }
+            onPaginationModelChange={handlePageSize}
             columns={state.columns}
           />
         </Box>

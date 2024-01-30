@@ -21,7 +21,7 @@ const Home = () => {
     columns: [],
     data: [],
     page: 1,
-    perPage: 25,
+    perPage: 100,
     total: 0,
     event_count: {
       path: 0,
@@ -40,24 +40,23 @@ const Home = () => {
   // reducer
   const [localState, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    handleCardClick("User Logs");
-    getMeta();
-  }, []);
-  useEffect(() => {
-    handleCardClick(localState.current_card);
-    getMeta();
-  }, [localState.page,localState.filtered_clicked]);
-
+  // useEffect(() => {
+  //   handleCardClick("User Logs");
+  //   getMeta();
+  // }, []);
   useEffect(() => {
     handleCardClick(localState.current_card, 1);
     getMeta();
   }, [localState.current_card,localState.filtered_clicked]);
+  useEffect(() => {
+    handleCardClick(localState.current_card);
+    getMeta();
+  }, [localState.page,localState.perPage]);
+
 
 
   async function getMeta(params) {
     let res = await metaCount();
-    console.log(res);
     dispatch({
       type: "Set_Val",
       payload: {
@@ -237,9 +236,7 @@ const Home = () => {
         default:
           break;
       }
-      if (res) {
-        console.log(rows);
-      }
+
       dispatch({
         type: "Set_Val",
         payload: {
@@ -366,7 +363,7 @@ const Home = () => {
             </Grid>
         {/* Data Grid  */}
         <Grid item xs={12} className="p-2">
-          <CusDataGrid state={localState}></CusDataGrid>
+          <CusDataGrid state={localState} setState={dispatch}/>
         </Grid>
       </Grid>
     </>
