@@ -16,7 +16,8 @@ import { Logout } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { setAuth } from "../../../store/action/action";
 export default function CusDrawer({ open, close }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -29,7 +30,7 @@ export default function CusDrawer({ open, close }) {
 
   const panel = [
     { link: "/", title: "Dashboard", icon: <DashboardIcon /> },
-    { link: "/user", title: "User", icon: <PersonIcon /> },
+    // { link: "/user", title: "User", icon: <PersonIcon /> },
   ];
 
   function handleLogout(){

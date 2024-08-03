@@ -40,11 +40,6 @@ const Home = () => {
   // reducer
   const [localState, dispatch] = useReducer(reducer, initialState);
 
-  // useEffect(() => {
-  //   handleCardClick("User Logs");
-  //   getMeta();
-  // }, []);
-
 
   useEffect(() => {
     handleCardClick(localState.current_card, 1);

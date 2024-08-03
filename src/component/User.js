@@ -99,7 +99,7 @@ const User = () => {
             { field: "city", headerName: "City", width: 200 },
             { field: "date", headerName: "Date & Time", width: 200 },
           ];
-          rows = res.data.data.data.map((slab, i) => {
+          rows = res?.data?.data?.data.map((slab, i) => {
             return {
               id: i + 1,
               email: slab.email_address,
@@ -122,7 +122,7 @@ const User = () => {
           current_card: card,
           columns,
           rows,
-          total: res.data.data.total,
+          total: res?.data?.data?.data?.total,
           isLoading: false,
         },
       });
@@ -163,6 +163,7 @@ const User = () => {
     // handleCardClick(localState.current_card, 1);
 
   }
+
 
   return (
     <>
@@ -231,7 +232,7 @@ const User = () => {
             </Grid>
         {/* Data Grid  */}
         <Grid item xs={12} className="p-2">
-          <CusDataGrid state={localState}></CusDataGrid>
+          <CusDataGrid state={localState} setState={dispatch} handleCardClick = {handleCardClick}></CusDataGrid>
         </Grid>
       </Grid>
     </>

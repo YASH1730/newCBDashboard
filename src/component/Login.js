@@ -23,7 +23,7 @@ const Login = () => {
         if(value.password === "cb@2023" && value.email === "classbazar19@gmail.com")
         {
             dispatch(setAuth({isAuth : true}))
-            window.location.pathname = "/"
+            // window.location.pathname = "/"
         }
         else
         dispatch(setAlert({open : true, variant : "error",message : "Incorrect credentials !!!" }))
