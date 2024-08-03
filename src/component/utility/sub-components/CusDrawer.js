@@ -37,7 +37,7 @@ export default function CusDrawer({ open, close }) {
     dispatch(setAuth({
       isAuth : false
     }))
-    window.location.reload();
+    window.location.pathname = "/login";
   }
 
   const list = () => (

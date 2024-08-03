@@ -44,11 +44,9 @@ function App() {
 }
 
 function MyRoutes() {
-  const {auth} = useSelector(state=>state)
   return (
     <Routes>
-      {console.log(auth)}
-      {auth.isAuth && <Route path="/" element={<Home />} />}
+      {<Route path="/" element={<Home />} />}
       {/* {auth.isAuth && <Route path="/user" element={<User />} />} */}
       <Route path="/*" element={<Login />} />
     </Routes>

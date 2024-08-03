@@ -12,6 +12,7 @@ import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import { listTrackRecords, logOut, metaCount } from "../service/service";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOffIcon from '@mui/icons-material/FilterAltOff';
+import { useSelector } from "react-redux";
 // User Journey, Enrol Click , Course Card Click, Search events
 
 const Home = () => {
@@ -40,8 +41,17 @@ const Home = () => {
   // reducer
   const [localState, dispatch] = useReducer(reducer, initialState);
 
+  const {auth} = useSelector(state=>state)
+
+  useEffect(()=>{
+    if(!auth.isAuth)
+      {
+              window.location.pathname = "/login"
+      }
+  },[auth])
 
   useEffect(() => {
+ 
     handleCardClick(localState.current_card, 1);
     getMeta();
   }, [localState.current_card,localState.filtered_clicked]);
